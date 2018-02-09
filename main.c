@@ -5,7 +5,7 @@
   {
         /* request auto detection */
         int gd = DETECT, gm, err;
-        int radius = 10, x, y, midy;
+        int radius = 10, x, y, midy,midx;
 
         /* initialize graphic mode */
         initgraph (&gd, &gm,NULL);
@@ -19,6 +19,7 @@
         } */
 
         x = 50;
+        midx = getmaxx() /2;
         midy = getmaxy() / 2;
         y = midy + 100;
 
@@ -42,21 +43,28 @@
                 line(x, y + radius + 50, x - 10, getmaxy() - 50);
                 line(x, y + radius + 50, x + 10, getmaxy() -50);
               
-                /* hand motion */
+                /* hand design */
                 line(x, y + radius + 10, x - 15, y + radius + 40);
                 line(x, y + radius + 10, x + 15, y + radius + 40);
                 
                /*image 2 - position of 2nd stickman*/
-                circle(x+450,y,radius);
-                line(x+450, y + radius, x+450, y + radius + 50);
+                circle(x+550,y,radius);
+                line(x+550, y + radius,x + 550,y + radius + 50);
                 
                 /*leg design*/
-                line(x+450,y+radius+50,x+440,getmaxy() - 50);
-                line(x+450,y+radius+50,x+460,getmaxy() - 50);
+                line(x+550,y+radius+50,x+540,getmaxy() - 50);
+                line(x+550,y+radius+50,x+560,getmaxy() - 50);
                 
                 /*hand design*/
-                line(x+450, y + radius + 10, x + 435, y + radius + 40);
-                line(x+450, y + radius + 10, x + 465, y + radius + 40);
+                line(x+550, y + radius + 10,x+ 535, y + radius + 40);
+                line(x+550, y + radius + 10,x+565, y + radius + 40);
+
+                /*net design*/
+                line(midx,getmaxy() - 50, midx, midy+30);
+                line(midx,midy+30,midx-50,midy-100);             
+                line(midx-50,midy-100,midx-50,midy+50);
+                line(midx,getmaxy()-100,midx-50,midy);
+
 
 
         }
