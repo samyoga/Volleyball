@@ -18,7 +18,7 @@
                 return 0;
         } */
 
-        x = 50;
+        x = 40;
         midx = getmaxx() /2;
         midy = getmaxy() / 2;
         y = midy + 100;
