@@ -124,32 +124,34 @@ int main()
         /*ball design*/
         xa=x+50;
         ya=y+50;
+        //circle(xa,ya,radius);
         while(1){
             circle(xa,ya,radius);
             if (_kbhit()) {
                 int ch = _getch();
                 _putch(ch);
+                printf("%c",ch);
                 switch (ch) {
                     case 'w':
-                        xx=0;yy=-1;
+                        xx=0;yy=1;
                         xa = xa + xx;
-                        ya = ya + yy;
+                        ya = ya - yy;
+                        //circle(xa,ya,radius);
                     case 's':
                         xx=0;yy=1;
                         xa = xa + xx;
                         ya = ya + yy;
+                        //circle(xa,ya,radius);
                     case 'a':
-                        xx=-1;yy=0;
-                        xa = xa + xx;
+                        xx=1;yy=0;
+                        xa = xa - xx;
                         ya = ya + yy;
+                        //circle(xa,ya,radius);
                     case 'd':
-                        xx=1;yy-0;
+                        xx=1;yy=0;
                         xa = xa + xx;
                         ya = ya + yy;
-                    default:
-                        xx=0;yy=-1;
-                        xa = xa + xx;
-                        ya = ya + yy;
+                       // circle(xa,ya,radius);
                 }
             }
 
