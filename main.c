@@ -78,55 +78,88 @@ int main()
     midx = getmaxx() /2;
     midy = getmaxy() / 2;
     y = midy + 100;
-
+    xa=x;
+    ya=y;
+    xb=x;
+    yb=y;
     init_keyboard();
 
     while (x < getmaxx() - 25) {
         /* clears graphic screen */
         cleardevice();
 
-        setlinestyle(SOLID_LINE, 1, 3);
-        /* road for stick man */
-        line(0, getmaxy() - 50, getmaxx(),getmaxy() -50);
-
-        /* image 1  -position of 1st stick man */
-        circle(x, y, radius);
-        line(x, y + radius, x, y + radius + 40);
-
-        /* leg design */
-        line(x, y + radius + 40, x - 10, getmaxy() - 80);
-        line(x, y + radius + 40, x + 10, getmaxy() - 80);
-        
-        /* hand design */
-        line(x, y + radius + 10, x - 15, y + radius + 30);
-        line(x, y + radius + 10, x + 15, y + radius + 30);
-        
-        /*image 2 - position of 2nd stickman*/
-        circle(x+550,y,radius);
-        line(x+550, y + radius,x + 550,y + radius + 40);
-        
-        /*leg design*/
-        line(x+550,y+radius+40,x+540,getmaxy() - 80);
-        line(x+550,y+radius+40,x+560,getmaxy() - 80);
-        
-        /*hand design*/
-        line(x+550, y + radius + 10,x+ 535, y + radius + 30);
-        line(x+550, y + radius + 10,x+565, y + radius + 30);
-
-        /*net design*/
-        line(midx,getmaxy() - 50, midx, midy+30);
-        line(midx,midy+30,midx-50,midy-100);             
-        line(midx-50,midy-100,midx-50,midy+50);
-        line(midx,getmaxy()-100,midx-50,midy);
-        line(0,midy+50,getmaxx(),midy+50);
-
-        
         xa=x+50;
         ya=y+50;
         xb=getmaxx()-50;
         yb=getmaxy()-50;
+        
        	while(1){
+            setlinestyle(SOLID_LINE, 1, 3);
+            /* road for stick man */
+            line(0, getmaxy() - 50, getmaxx(),getmaxy() -50);
+
+            /*net design*/
+            line(midx,getmaxy() - 50, midx, midy+30);
+            line(midx,midy+30,midx-50,midy-100);             
+            line(midx-50,midy-100,midx-50,midy+50);
+            line(midx,getmaxy()-100,midx-50,midy);
+            line(0,midy+50,getmaxx(),midy+50);
+            /* image 1  -position of 1st stick man */
+            circle(xa, ya, radius);
+            line(xa, ya + radius, xa, ya + radius + 40);
+
+            /* leg design */
+            line(xa, ya + radius + 40, xa - 10, getmaxy() - 80);
+            line(xa, ya + radius + 40, xa + 10, getmaxy() - 80);
+            
+            /* hand design */
+            line(xa, ya + radius + 10, xa - 15, ya + radius + 30);
+            line(xa, ya + radius + 10, xa + 15, ya + radius + 30);
+
+            /*image 2 - position of 2nd stickman*/
+            circle(xb+550,yb,radius);
+            line(xb+550, yb + radius,xb + 550,yb + radius + 40);
+            
+            /*leg design*/
+            line(xb+550,yb+radius+40,xb+540,getmaxy() - 80);
+            line(xb+550,yb+radius+40,xb+560,getmaxy() - 80);
+            
+            /*hand design*/
+            line(xb+550, yb + radius + 10,xb+ 535, yb + radius + 30);
+            line(xb+550, yb + radius + 10,xb+565, yb + radius + 30);
+            
+            /*ball design*/
+            circle(xx+50,yy+50,5);
+            
+            if (i % 10 == 0) {
+                /* left to right */
+                xx = xx + 5;
+                i = 0;
+            }    
+            
+            if(flag){
+                /*bottom to top*/
+                yy=yy-10;
+            }
+            else{
+                /*top to bottom*/
+                yy=yy+10;
+            }
+            /* check whether ball reached y-axis maximum */
+            if (yy >= getmaxy()) {
+                    flag = 1;
+            } 
+            else if (yy <= 0) {
+                    flag = 0;
+            }
+
+            /* sleeps for 50 milliseconds */
+            delay(50);
+        
+            i++;
+
             if (_kbhit()) {
+
                 int ch = _getch();
                 _putch(ch);
                // printf("%c",ch);
@@ -136,80 +169,18 @@ int main()
                 if (ch=='a') xa--;
                 if (ch=='d') xa++;
 
-                 /*switch (ch) {
-                    case 'w':
-                        xx=0;yy=1;
-                        xa = xa + xx;
-                        ya = ya - yy;
-                        //circle(xa,ya,radius);
-                    case 's':
-                        xx=0;yy=1;
-                        xa = xa + xx;
-                        ya = ya + yy;
-                        //circle(xa,ya,radius);
-                    case 'a':
-                        xx=1;yy=0;
-                        xa = xa - xx;
-                        ya = ya + yy;
-                        //circle(xa,ya,radius);
-                    case 'd':
-                        xx=1;yy=0;
-                        xa = xa + xx;
-                        ya = ya + yy;
-                       // circle(xa,ya,radius);
-                }*/
                 //for player2
                 if (ch=='i') yb--;
                 if (ch=='j') yb++;
                 if (ch=='k') xb--;
                 if (ch=='l') xb++;
             }
-
-        while (xx<=getmaxx()){
-            
-            /*ball design*/
-            circle(xx+50,yy+50,15);
-            
-            if (i % 10 == 0) {
-                        /* left to right */
-                        xx = xx + 5;
-                        i = 0;
-                    }
-                     
-            
-            if(flag)
-            {
-                /*bottom to top*/
-                yy=yy-10;
-
-                }else{
-
-                /*top to bottom*/
-                yy=yy+10;
-
-                }
-            
-                /* check whether ball reached y-axis maximum */
-                if (yy >= getmaxy()) {
-                        flag = 1;
-                } else if (yy <= 0) {
-                        flag = 0;
-                }
-
-                /* sleeps for 50 milliseconds */
-                delay(50);
-        
-            i++;
-         
-       		}
-
-            }
-            
+            cleardevice();
         }
-    
+        delay(50);
+    }
 
     //getch();
-    cleardevice();
     close_keyboard();
 
     /* deallocate memory allocated for graphic screen */
