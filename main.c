@@ -70,6 +70,7 @@ int main()
     int gd = DETECT, gm, err;
     int radius = 10, x, y, midy,midx,i;
     int xx=0,yy=0;
+    int xa,ya;
 
     /* initialize graphic mode */
     initgraph (&gd, &gm,NULL);
@@ -121,24 +122,39 @@ int main()
         line(0,midy+50,getmaxx(),midy+50);}
 
         /*ball design*/
-        circle(x+50,y+50,radius);
-        if (_kbhit()) {
-            int ch = _getch();
-            _putch(ch);
-            switch (ch) {
-                case 'w':
-                    xx=0;yy=-1;
-                case 's':
-                    xx=0;yy=1;
-                case 'a':
-                    xx=-1;yy=0;
-                case 'd':
-                    xx=1;yy-0;
-
+        xa=x+50;
+        ya=y+50;
+        while(1){
+            circle(xa,ya,radius);
+            if (_kbhit()) {
+                int ch = _getch();
+                _putch(ch);
+                switch (ch) {
+                    case 'w':
+                        xx=0;yy=-1;
+                        xa = xa + xx;
+                        ya = ya + yy;
+                    case 's':
+                        xx=0;yy=1;
+                        xa = xa + xx;
+                        ya = ya + yy;
+                    case 'a':
+                        xx=-1;yy=0;
+                        xa = xa + xx;
+                        ya = ya + yy;
+                    case 'd':
+                        xx=1;yy-0;
+                        xa = xa + xx;
+                        ya = ya + yy;
+                    default:
+                        xx=0;yy=-1;
+                        xa = xa + xx;
+                        ya = ya + yy;
+                }
             }
+
+            delay(50);
         }
-        x = x + xx;
-        y = y + yy;
     }
 
     //getch();
