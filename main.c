@@ -105,58 +105,65 @@ int main()
             line(midx,getmaxy()-100,midx-50,midy);
             line(0,midy+50,getmaxx(),midy+50);
             /* image 1  -position of 1st stick man */
-            circle(xa, ya, radius);
-            line(xa, ya + radius, xa, ya + radius + 40);
+            circle(xa-30, ya-50, radius);
+            line(xa-30, ya + radius-50, xa-30, ya + radius - 10);
 
             /* leg design */
-            line(xa, ya + radius + 40, xa - 10, getmaxy() - 80);
-            line(xa, ya + radius + 40, xa + 10, getmaxy() - 80);
+            line(xa-30, ya + radius - 10, xa - 20, ya +radius +10);
+            line(xa-30, ya + radius - 10, xa - 40, ya +radius +10);
             
             /* hand design */
-            line(xa, ya + radius + 10, xa - 15, ya + radius + 30);
-            line(xa, ya + radius + 10, xa + 15, ya + radius + 30);
+            line(xa-30, ya + radius -40, xa - 15, ya + radius -20 );
+            line(xa-30, ya + radius -40, xa -45, ya + radius -20 );
 
             /*image 2 - position of 2nd stickman*/
-            circle(xb+550,yb,radius);
-            line(xb+550, yb + radius,xb + 550,yb + radius + 40);
+            circle(xb,yb-90,radius);
+            line(xb, yb + radius-90,xb,yb + radius -60);
             
             /*leg design*/
-            line(xb+550,yb+radius+40,xb+540,getmaxy() - 80);
-            line(xb+550,yb+radius+40,xb+560,getmaxy() - 80);
+            line(xb,yb+radius-60,xb-10,yb+ radius -40);
+            line(xb,yb+radius-60,xb+10,yb +radius -40);
             
             /*hand design*/
-            line(xb+550, yb + radius + 10,xb+ 535, yb + radius + 30);
-            line(xb+550, yb + radius + 10,xb+565, yb + radius + 30);
+            line(xb, yb + radius - 80,xb-15, yb + radius - 60);
+            line(xb, yb + radius - 80,xb+15, yb + radius - 60);
             
             /*ball design*/
-            circle(xx+50,yy+50,5);
-            
-            if (i % 10 == 0) {
-                /* left to right */
-                xx = xx + 5;
-                i = 0;
-            }    
-            
+            circle(xx+50,yy+50,7);
+         
             if(flag){
                 /*bottom to top*/
-                yy=yy-10;
+                yy=yy-50;
             }
             else{
                 /*top to bottom*/
-                yy=yy+10;
-            }
+                yy=yy+50;}
             /* check whether ball reached y-axis maximum */
-            if (yy >= getmaxy()) {
+            if (yy >= getmaxy()-100) {
                     flag = 1;
             } 
             else if (yy <= 0) {
                     flag = 0;
             }
 
+            if (i){
+            	/*right to left*/
+            	xx=xx-50;
+            }
+            else{
+            	/*left to right*/
+            	xx=xx+50;
+            }
+
+            if(xx >=getmaxx()-100){
+            	i=1;
+            }
+            else if (xx<=0){
+            	i=0;
+            }
+
             /* sleeps for 50 milliseconds */
             delay(50);
-        
-            i++;
 
             if (_kbhit()) {
 
@@ -171,8 +178,8 @@ int main()
 
                 //for player2
                 if (ch=='i') yb--;
-                if (ch=='j') yb++;
-                if (ch=='k') xb--;
+                if (ch=='k') yb++;
+                if (ch=='j') xb--;
                 if (ch=='l') xb++;
             }
             cleardevice();
