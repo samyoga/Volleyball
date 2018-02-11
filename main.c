@@ -68,8 +68,11 @@ int main()
 {
     /* request auto detection */
     int gd = DETECT, gm, err;
-    int radius = 10, x, y, midy,midx,i=0,flag=0;
+    int radius = 10, x, y, midy,midx,i=0,flag=0,a;
     int xx=0,yy=0;
+
+
+
     int xa,ya,xb,yb;
 
     /* initialize graphic mode */
@@ -92,7 +95,7 @@ int main()
         ya=y+50;
         xb=getmaxx()-50;
         yb=getmaxy()-50;
-        
+         label:
        	while(1){
             setlinestyle(SOLID_LINE, 1, 3);
             /* road for stick man */
@@ -129,38 +132,104 @@ int main()
             line(xb, yb + radius - 80,xb+15, yb + radius - 60);
             
             /*ball design*/
-            circle(xx+50,yy+50,7);
-         
-            if(flag){
-                /*bottom to top*/
-                yy=yy-50;
+           
+            circle(xx+60,yy+50,7);
+            	/*delay(50);
+            	cleardevice();
+            	if (flag==0){
+            		yy==yy-1;
+            	}
+            	else if(flag ==1) {yy=yy+1;
+            	if ((yy+57)==(ya-50-radius))
+            	{
+            		yy=yy-200;
+            		xx=xx+300;
+            		delay(50);
+            	}
+            	else {goto label;}
             }
-            else{
+
+            if (yy>=getmaxy()-100){
+            		flag=1;
+            	}
+            	else if (yy<=0){
+            		flag=0;
+            	}
+
+            	if (i){
+            			delay(100);
+            			cleardevice();
+            		
+            			xx=xx+1; 
+           
+            	if ((yy+57)==(yb-90-radius)||(xx+67)==xb-radius){
+            		yy=yy-200;
+            		xx=xx-300;
+
+            	}
+            
+
+            	if (xx>=getmaxx()-100){
+            		i=1;
+            	}
+            	else if(xx<=0){
+            		i=0;
+            	}
+            	}*/
+            
+
+            
+
+           
+            
+            if(flag){
+             /*bottom to top*/
+                yy=yy-1;}
+			else{
                 /*top to bottom*/
-                yy=yy+50;}
+                yy=yy+1;
+                if ((yy+57)==(ya-50-radius)){
+                	yy=yy-300;
+                	a=yy;
+            		xx=xx+530;
+            		}
+            		
+            	}
+            if ((yy-236)==(yb-90-radius)){
+
+            	yy=yy-300;
+            	xx=xx-530;
+            }
+              
             /* check whether ball reached y-axis maximum */
-            if (yy >= getmaxy()-100) {
+           // if (((yy+57)==(ya-50-radius))||(yy+57)==(yb-90-radius)){
+            if (yy>=getmaxy()-100) { 
                     flag = 1;
             } 
             else if (yy <= 0) {
                     flag = 0;
             }
 
-            if (i){
+          /*  if (i){
             	/*right to left*/
-            	xx=xx-50;
+            	/*xx=xx-50;          
             }
             else{
             	/*left to right*/
-            	xx=xx+50;
+            	/*xx=xx+50;
+
+
             }
 
+           // if (((xx+67)==(xa-30-radius))||(xx+getmaxx()-50)==(xb)){
             if(xx >=getmaxx()-100){
             	i=1;
             }
             else if (xx<=0){
             	i=0;
             }
+        
+        
 
             /* sleeps for 50 milliseconds */
             delay(50);
