@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "time.h": "c",
-        "ioctl.h": "c"
+        "ioctl.h": "c",
+        "graphics.h": "c"
     }
 }
