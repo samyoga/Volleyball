@@ -86,9 +86,9 @@ int main() {
         /* request auto detection */
         int gdriver = DETECT, gmode, err;
         int i = 0, midx, midy;
-        int xrad[9], yrad[9], x[9][60], y[9][60];
-        int pos[9], planet[9], tmp;
-
+        int xrad, yrad, x[9][60], y[9][60];
+        int radius, tmp;
+        int posn;
         /* initialize graphic mode */
         initgraph(&gdriver, &gmode, NULL);
 
@@ -97,24 +97,18 @@ int main() {
         midy = getmaxy() / 2;
 
         /* manipulating radius of all 9 planets */
-        planet[0] = 7;
-        for (i = 1; i < 9; i++) {
-                planet[i] = planet[i - 1] + 1;
-        }
-
-        /* offset position for the planets on their corresponding orbit */
-        for (i = 0; i < 9; i++) {
-                pos[i] = i * 6;
-        }
+        radius = 10;
+        
+        posn = 8*6;
 
         /* orbits for all 9 planets */
 
-        xrad[8] =  210;
-        yrad[8] =  105;
+        xrad =  210;
+        yrad =  105;
 
         /* positions of planets on their corresponding orbits */
 
-        planetMotion(xrad[8], yrad[8], midx, midy, x[8], y[8]);
+        planetMotion(xrad, yrad, midx, midy, x[8], y[8]);
 
         init_keyboard();
 
@@ -122,20 +116,19 @@ int main() {
                 /* drawing 9 orbits */
                 setcolor(WHITE);
                 
-                ellipse(midx, midy, 0, 360, xrad[8], yrad[8]);
+                ellipse(midx, midy, 0, 360, xrad, yrad);
 
                 /* pluto in ninth orbit */
                 setcolor(LIGHTRED);
                 //setfillstyle(SOLID_FILL, LIGHTRED);
-                pieslice(x[8][pos[8]], y[8][pos[8]], 0, 360, planet[8]);
+                pieslice(x[8][posn], y[8][posn], 0, 360, radius);
 
                 /* checking for one complete rotation */
-                for (i = 0; i < 9; i++) {
-                        if (pos[i] <= 0) {
-                                pos[i] = 59;
-                        } else {
-                                pos[i] = pos[i] - 1;
-                        }
+
+                if (posn <= 0) {
+                        posn = 28;
+                } else {
+                        posn = posn - 1;
                 }
 
                 /* sleep for 100 milliseconds */
