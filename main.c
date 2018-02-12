@@ -133,8 +133,8 @@ int main()
         /* clears graphic screen */
         cleardevice();
 
-        xa=x+50;
-        ya=y+50;
+        xa=x+30;
+        ya=y+270;
         xb=getmaxx()-50;
         yb=getmaxy()-50;
          label:
@@ -175,14 +175,13 @@ int main()
             
             /*ball design*/
            
-            while (!_kbhit()) {
                 /* drawing orbits */
                 setcolor(BLACK);
                 
                 ellipse(midx, midy, 0, 360, xrad, yrad);
 
                 /* ball */
-                setcolor(LIGHTRED);
+                setcolor(WHITE);
                 //setfillstyle(SOLID_FILL, LIGHTRED);
                 pieslice(a[8][posn], b[8][posn], 0, 360, radius);
 
@@ -201,9 +200,6 @@ int main()
                 /* sleep for 100 milliseconds */
                 delay(100);
 
-                /* clears graphic screen */
-                cleardevice();
-        }
             
             /* sleeps for 50 milliseconds */
             delay(50);
