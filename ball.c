@@ -71,13 +71,16 @@ int _putch(int c) {
 }
 
 /* manipulates the position of planets on the orbit */
-void planetMotion(int xrad, int yrad, int midx, int midy, int x[60], int y[60]) {
+
+void planetMotion(int xrad, int yrad, int midx, int midy, int x[8], int y[8]) {
         int i, j = 0;
 
         /* positions of planets in their corresponding orbits */
         for (i = 180; i > 0; i = i - 6) {
                 x[j] = midx - (xrad * cos((i * 3.14) / 180));
                 y[j++] = midy - (yrad * sin((i * 3.14) / 180));
+                //printf ("%d, %d" , x[j],y[j]);
+                //outtextxy(200, 425, "C Graphics Program");
         }
         return;
 }
@@ -99,7 +102,7 @@ int main() {
         /* manipulating radius of all 9 planets */
         radius = 10;
         
-        posn = 8*6;
+        posn = 48;
 
         /* orbits for all 9 planets */
 
@@ -126,7 +129,7 @@ int main() {
                 /* checking for one complete rotation */
 
                 if (posn <= 0) {
-                        posn = 28;
+                        posn = 30;
                 } else {
                         posn = posn - 1;
                 }
