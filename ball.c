@@ -75,7 +75,7 @@ void planetMotion(int xrad, int yrad, int midx, int midy, int x[60], int y[60]) 
         int i, j = 0;
 
         /* positions of planets in their corresponding orbits */
-        for (i = 360; i > 0; i = i - 6) {
+        for (i = 180; i > 0; i = i - 6) {
                 x[j] = midx - (xrad * cos((i * 3.14) / 180));
                 y[j++] = midy - (yrad * sin((i * 3.14) / 180));
         }
@@ -108,16 +108,13 @@ int main() {
         }
 
         /* orbits for all 9 planets */
-        xrad[0] = 60, yrad[0] = 30;
-        for (i = 1; i < 9; i++) {
-                xrad[i] = xrad[i - 1] + 30;
-                yrad[i] = yrad[i - 1] + 15;
-        }
+
+        xrad[8] =  210;
+        yrad[8] =  105;
 
         /* positions of planets on their corresponding orbits */
-        for (i = 0; i < 9; i++) {
-                planetMotion(xrad[i], yrad[i], midx, midy, x[i], y[i]);
-        }
+
+        planetMotion(xrad[8], yrad[8], midx, midy, x[8], y[8]);
 
         init_keyboard();
 
