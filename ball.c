@@ -64,6 +64,7 @@ int _getch()
     return ch;
 }
  
+
 int _putch(int c) {
     putchar(c);
     fflush(stdout);
@@ -113,7 +114,7 @@ int main() {
         /* manipulating radius*/
         radius = 10;
         
-        posn = 30;
+        posn = 20;
 
         xrad =  210;
         yrad =  105;
@@ -126,7 +127,7 @@ int main() {
 
         while (!_kbhit()) {
                 /* drawing orbits */
-                setcolor(WHITE);
+                setcolor(BLACK);
                 
                 ellipse(midx, midy, 0, 360, xrad, yrad);
 
