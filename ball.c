@@ -88,9 +88,9 @@ void AntiMotion(int xrad, int yrad, int midx, int midy, int x[1], int y[1]) {
         int i, j = 0;
 
         /* positions of ball in ellipse*/
-        for (i = 180; i > 0; i = i - 6) {
-                x[j] = midx + (xrad * cos((i * 3.14) / 180));
-                y[j++] = midy + (yrad * sin((i * 3.14) / 180));
+        for (i = 270; i > 0; i = i - 6) {
+                x[j] = midx + (xrad * sin((i * 3.14) / 180));
+                y[j++] = midy + (yrad * cos((i * 3.14) / 180));
 
         }
         return;
@@ -113,14 +113,14 @@ int main() {
         /* manipulating radius*/
         radius = 10;
         
-        posn = 60;
+        posn = 30;
 
         xrad =  210;
         yrad =  105;
 
         /* positions of ball on corresponding ellipse */
 
-        AntiMotion(xrad, yrad, midx, midy, x[8], y[8]);
+        Motion(xrad, yrad, midx, midy, x[8], y[8]);
 
         init_keyboard();
 
@@ -136,11 +136,15 @@ int main() {
                 pieslice(x[8][posn], y[8][posn], 0, 360, radius);
 
                 /* checking for one complete rotation */
-
+                if (posn>0){
+                    posn = posn - 1;
+                    Motion(xrad, yrad, midx, midy, x[8], y[8]);
+                }
                 if (posn <= 0) {
-                        posn = 30;
-                } else {
-                        posn = posn - 1;
+                        while(posn!=30){
+                            AntiMotion(xrad, yrad, midx, midy, x[8], y[8]);
+                            posn = posn + 1;
+                        }
                 }
 
                 /* sleep for 100 milliseconds */
