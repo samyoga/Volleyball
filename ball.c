@@ -72,15 +72,26 @@ int _putch(int c) {
 
 /* manipulates the position of planets on the orbit */
 
-void planetMotion(int xrad, int yrad, int midx, int midy, int x[8], int y[8]) {
+void Motion(int xrad, int yrad, int midx, int midy, int x[1], int y[1]) {
         int i, j = 0;
 
-        /* positions of planets in their corresponding orbits */
+        /* positions of ball in ellipse*/
         for (i = 180; i > 0; i = i - 6) {
                 x[j] = midx - (xrad * cos((i * 3.14) / 180));
                 y[j++] = midy - (yrad * sin((i * 3.14) / 180));
-                //printf ("%d, %d" , x[j],y[j]);
-                //outtextxy(200, 425, "C Graphics Program");
+
+        }
+        return;
+}
+
+void AntiMotion(int xrad, int yrad, int midx, int midy, int x[1], int y[1]) {
+        int i, j = 0;
+
+        /* positions of ball in ellipse*/
+        for (i = 180; i > 0; i = i - 6) {
+                x[j] = midx + (xrad * cos((i * 3.14) / 180));
+                y[j++] = midy + (yrad * sin((i * 3.14) / 180));
+
         }
         return;
 }
@@ -99,29 +110,27 @@ int main() {
         midx = getmaxx() / 2;
         midy = getmaxy() / 2;
 
-        /* manipulating radius of all 9 planets */
+        /* manipulating radius*/
         radius = 10;
         
-        posn = 48;
-
-        /* orbits for all 9 planets */
+        posn = 60;
 
         xrad =  210;
         yrad =  105;
 
-        /* positions of planets on their corresponding orbits */
+        /* positions of ball on corresponding ellipse */
 
-        planetMotion(xrad, yrad, midx, midy, x[8], y[8]);
+        AntiMotion(xrad, yrad, midx, midy, x[8], y[8]);
 
         init_keyboard();
 
         while (!_kbhit()) {
-                /* drawing 9 orbits */
+                /* drawing orbits */
                 setcolor(WHITE);
                 
                 ellipse(midx, midy, 0, 360, xrad, yrad);
 
-                /* pluto in ninth orbit */
+                /* ball */
                 setcolor(LIGHTRED);
                 //setfillstyle(SOLID_FILL, LIGHTRED);
                 pieslice(x[8][posn], y[8][posn], 0, 360, radius);
