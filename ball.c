@@ -138,7 +138,7 @@ int main() {
                 /* checking for one complete rotation */
                 if (posn>0){
                     posn = posn - 1;
-                    Motion(xrad, yrad, midx, midy, x[8], y[8]);
+                    //Motion(xrad, yrad, midx, midy, x[8], y[8]);
                 }
                 if (posn <= 0) {
                         while(posn!=30){
