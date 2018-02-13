@@ -104,6 +104,7 @@ int main() {
         int xrad, yrad, x[9][60], y[9][60];
         int radius, tmp;
         int posn;
+        int count;
         /* initialize graphic mode */
         initgraph(&gdriver, &gmode, NULL);
 
@@ -114,7 +115,7 @@ int main() {
         /* manipulating radius*/
         radius = 10;
         
-        posn = 20;
+        posn = 30;
 
         xrad =  210;
         yrad =  105;
@@ -138,15 +139,28 @@ int main() {
 
                 /* checking for one complete rotation */
                 if (posn>0){
-                    posn = posn - 1;
+                        posn = posn - 1;
+                        count++;
                     //Motion(xrad, yrad, midx, midy, x[8], y[8]);
                 }
+
                 if (posn <= 0) {
                         while(posn!=30){
-                            AntiMotion(xrad, yrad, midx, midy, x[8], y[8]);
                             posn = posn + 1;
                         }
+                        AntiMotion(xrad, yrad, midx, midy, x[8], y[8]);
+                        count++;
+                        
                 }
+
+                printf("%d",count);
+                if (count>=62){
+                    Motion(xrad, yrad, midx, midy, x[8], y[8]);
+                    posn = 30;
+                    count =0;
+                }
+                
+                //printf ("%d",posn);
 
                 /* sleep for 100 milliseconds */
                 delay(100);

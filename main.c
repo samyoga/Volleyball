@@ -104,12 +104,14 @@ int main()
     int xx=0,yy=0;
     int xrad, yrad, a[9][60], b[9][60];
     int tmp;
-    int posn=20;
+    int posn=30;
 
     int xa,ya,xb,yb;
 
     int s_xa,s_ya,s_xb,s_yb;
     int mmx,mmy;
+
+    int count;
 
     /* initialize graphic mode */
     initgraph (&gd, &gm,NULL);
@@ -134,17 +136,19 @@ int main()
 
     init_keyboard();
 
-    while (x < getmaxx() - 25) {
+    while (1) {
         /* clears graphic screen */
-        cleardevice();
+        //cleardevice();
 
         xa=x+30;
         ya=getmaxy()-100;
         xb=getmaxx()-50;
         yb=getmaxy()-50;
         
-        mmx = midx;
+        mmx = midx -260;
         mmy = midy;
+
+        Motion(xrad, yrad, mmx, mmy, a[8], b[8]);
 
        	while(1){
             s_xa = xa -30 - radius;
@@ -208,17 +212,27 @@ int main()
             if (mmx = s_xa){
                 if (posn>0){
                     posn = posn - 1;
-                    Motion(xrad, yrad, mmx, mmy, a[8], b[8]);
+                    //Motion(xrad, yrad, mmx, mmy, a[8], b[8]);
+                    count++;
                 }
             }
             if (posn <= 0) {
-                AntiMotion(xrad, yrad, mmx, mmy, a[8], b[8]);
-                    while(posn!=30){
-                        AntiMotion(xrad, yrad, mmx, mmy, a[8], b[8]);
+                while(posn!=30){
+                    for (i=0;i<30;i++){
                         posn = posn + 1;
                     }
-                }      
+                    AntiMotion(xrad, yrad, mmx, mmy, a[8], b[8]);
+                    count++;
+                }
+            } 
 
+            if (count>=58){
+                Motion(xrad, yrad, mmx, mmy, a[8], b[8]);
+                posn = 30;
+                count =0;
+            }     
+
+            //AntiMotion(xrad, yrad, mmx, mmy, a[8], b[8]);
             /* sleep for 100 milliseconds */
             delay(100);
 
