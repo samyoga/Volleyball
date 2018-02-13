@@ -84,7 +84,7 @@ void AntiMotion(int xrad, int yrad, int midx, int midy, int x[1], int y[1]) {
         int i, j = 0;
 
         /* positions of ball in ellipse*/
-        for (i = 270; i > 0; i = i - 6) {
+        for (i = 290; i > 0; i = i - 6) {
                 x[j] = midx + (xrad * sin((i * 3.14) / 180));
                 y[j++] = midy + (yrad * cos((i * 3.14) / 180));
 
@@ -109,13 +109,13 @@ int main()
     /* initialize graphic mode */
     initgraph (&gd, &gm,NULL);
     x = 40;
-    y = midy + 100;
+    y = midy+100;
     /*mid positions at x and y*/
     midx = getmaxx() /2;
     midy = getmaxy() / 2;
 
-    xrad=210;
-    yrad=105;
+    xrad=290;
+    yrad=200;
 
     
     xa=x;
@@ -125,7 +125,7 @@ int main()
 
     /* positions of ball on corresponding ellipse */
 
-        Motion(xrad, yrad, midx, midy, a[8], b[8]);
+        Motion(xrad-10, yrad, midx, midy+40, a[8], b[8]);
 
     init_keyboard();
 
@@ -134,68 +134,75 @@ int main()
         cleardevice();
 
         xa=x+30;
-        ya=y+270;
+        ya=getmaxy()-100;
         xb=getmaxx()-50;
         yb=getmaxy()-50;
-         label:
+         
+
        	while(1){
             setlinestyle(SOLID_LINE, 1, 3);
             /* road for stick man */
             line(0, getmaxy() - 50, getmaxx(),getmaxy() -50);
 
             /*net design*/
-            line(midx,getmaxy() - 50, midx, midy+30);
-            line(midx,midy+30,midx-50,midy-100);             
-            line(midx-50,midy-100,midx-50,midy+50);
-            line(midx,getmaxy()-100,midx-50,midy);
-            line(0,midy+50,getmaxx(),midy+50);
+            line(midx,getmaxy() - 50, midx, midy+10);
+            line(midx,midy+10,midx-60,midy-100);             
+            line(midx-60,midy-100,midx-60,midy);
+            line(midx,getmaxy()-120,midx-60,midy-20);
+            line(0,midy,getmaxx(),midy);
+
             /* image 1  -position of 1st stick man */
-            circle(xa-30, ya-50, radius);
-            line(xa-30, ya + radius-50, xa-30, ya + radius - 10);
+            circle(xa-30, ya-100, radius);
+            line(xa-30, ya + radius-100, xa-30, ya + radius - 70);
 
             /* leg design */
-            line(xa-30, ya + radius - 10, xa - 20, ya +radius +10);
-            line(xa-30, ya + radius - 10, xa - 40, ya +radius +10);
+            line(xa-30, ya + radius - 70, xa - 20, ya +radius -50);
+            line(xa-30, ya + radius - 70, xa - 40, ya +radius -50);
             
             /* hand design */
-            line(xa-30, ya + radius -40, xa - 15, ya + radius -20 );
-            line(xa-30, ya + radius -40, xa -45, ya + radius -20 );
+            line(xa-30, ya + radius -90, xa - 15, ya + radius -80 );
+            line(xa-30, ya + radius -90, xa -45, ya + radius -80 );
 
             /*image 2 - position of 2nd stickman*/
-            circle(xb,yb-90,radius);
-            line(xb, yb + radius-90,xb,yb + radius -60);
+            circle(xb,yb-150,radius);
+            line(xb, yb + radius-150,xb,yb + radius -120);
             
             /*leg design*/
-            line(xb,yb+radius-60,xb-10,yb+ radius -40);
-            line(xb,yb+radius-60,xb+10,yb +radius -40);
+            line(xb,yb+radius-120,xb-10,yb+ radius -100);
+            line(xb,yb+radius-120,xb+10,yb +radius -100);
             
             /*hand design*/
-            line(xb, yb + radius - 80,xb-15, yb + radius - 60);
-            line(xb, yb + radius - 80,xb+15, yb + radius - 60);
+            line(xb, yb + radius - 140,xb-15, yb + radius - 130);
+            line(xb, yb + radius - 140,xb+15, yb + radius - 130);
             
             /*ball design*/
            
                 /* drawing orbits */
-                setcolor(BLACK);
+                setcolor(WHITE);
                 
-                ellipse(midx, midy, 0, 360, xrad, yrad);
+                ellipse(midx, midy+40, 0, 360, xrad, yrad);
 
                 /* ball */
-                setcolor(WHITE);
+               setcolor(WHITE);
                 //setfillstyle(SOLID_FILL, LIGHTRED);
                 pieslice(a[8][posn], b[8][posn], 0, 360, radius);
 
+                /* Motion(xrad, yrad, midx, midy, a[8], b[8]);
+                if (((a[8][posn]+radius)==(xa-30+radius))&&((b[8][posn]+radius)==(ya-50+radius))){
                 /* checking for one complete rotation */
+                
                 if (posn>0){
                     posn = posn - 1;
-                    //Motion(xrad, yrad, midx, midy, x[8], y[8]);
+                    Motion(xrad, yrad, midx, midy+40, a[8], b[8]);
                 }
-                if (posn <= 0) {
+            
+               if (posn <= 0) {
                         while(posn!=30){
-                            AntiMotion(xrad, yrad, midx, midy, a[8], b[8]);
+                            AntiMotion(xrad, yrad, midx, midy+40, a[8], b[8]);
                             posn = posn + 1;
                         }
                 }
+            
 
                 /* sleep for 100 milliseconds */
                 delay(100);
