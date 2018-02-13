@@ -68,25 +68,27 @@ int _putch(int c) {
 
 /* manipulates the position of planets on the orbit */
 
-void Motion(int xrad, int yrad, int midx, int midy, int a[1], int b[1]) {
+void Motion(int xrad, int yrad, int mmx, int mmy, int a[1], int b[1]) {
         int i, j = 0;
-
+        mmx = mmx + 290;
+        mmy = mmy + 50;
         /* positions of ball in ellipse*/
         for (i = 180; i > 0; i = i - 6) {
-                a[j] = midx - (xrad * cos((i * 3.14) / 180));
-                b[j++] = midy - (yrad * sin((i * 3.14) / 180));
+                a[j] = mmx - (xrad * cos((i * 3.14) / 180));
+                b[j++] = mmy - (yrad * sin((i * 3.14) / 180));
 
         }
         return;
 }
 
-void AntiMotion(int xrad, int yrad, int midx, int midy, int a[1], int b[1]) {
+void AntiMotion(int xrad, int yrad, int mmx, int mmy, int a[1], int b[1]) {
         int i, j = 0;
-
+        mmx = mmx + 290;
+        mmy = mmy + 50;
         /* positions of ball in ellipse*/
         for (i = 290; i > 0; i = i - 6) {
-                a[j] = midx + (xrad * sin((i * 3.14) / 180));
-                b[j++] = midy + (yrad * cos((i * 3.14) / 180));
+                a[j] = mmx + (xrad * sin((i * 3.14) / 180));
+                b[j++] = mmy + (yrad * cos((i * 3.14) / 180));
 
         }
         return;
@@ -128,7 +130,7 @@ int main()
 
     /* positions of ball on corresponding ellipse */
 
-    Motion(xrad-10, yrad, midx, midy+40, a[8], b[8]);
+    //Motion(xrad-10, yrad, midx, midy+40, a[8], b[8]);
 
     init_keyboard();
 
@@ -142,13 +144,13 @@ int main()
         yb=getmaxy()-50;
         
         mmx = midx;
-        mmy = midy + 40;
+        mmy = midy;
 
        	while(1){
-            s_xa = xa -30;
-            s_ya = ya -100 - radius;
-            s_xb = xb;
-            s_yb = yb -150 - radius;
+            s_xa = xa -30 - radius;
+            s_ya = ya -100 ;
+            s_xb = xb - radius;
+            s_yb = yb -150 ;
             
             setlinestyle(SOLID_LINE, 1, 3);
             /* road for stick man */
@@ -190,7 +192,7 @@ int main()
                 /* drawing orbits */
             setcolor(WHITE);
             
-            ellipse(mmx, mmy, 0, 360, xrad, yrad);
+            //ellipse(mmx -260, mmy + 50, 0, 360, xrad, yrad);
 
             /* ball */
             setcolor(WHITE);
@@ -201,21 +203,21 @@ int main()
             if (((a[8][posn]+radius)==(xa-30+radius))&&((b[8][posn]+radius)==(ya-50+radius))){
             /* checking for one complete rotation */
             
+            mmx = mmx -260 - xrad;
+
             if (mmx = s_xa){
                 if (posn>0){
                     posn = posn - 1;
                     Motion(xrad, yrad, mmx, mmy, a[8], b[8]);
                 }
             }
-
-            if (mmx = s_xb){
-                if (posn <= 0) {
+            if (posn <= 0) {
+                AntiMotion(xrad, yrad, mmx, mmy, a[8], b[8]);
                     while(posn!=30){
                         AntiMotion(xrad, yrad, mmx, mmy, a[8], b[8]);
                         posn = posn + 1;
                     }
-                }
-            }        
+                }      
 
             /* sleep for 100 milliseconds */
             delay(100);
