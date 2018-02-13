@@ -68,25 +68,25 @@ int _putch(int c) {
 
 /* manipulates the position of planets on the orbit */
 
-void Motion(int xrad, int yrad, int midx, int midy, int x[1], int y[1]) {
+void Motion(int xrad, int yrad, int midx, int midy, int a[1], int b[1]) {
         int i, j = 0;
 
         /* positions of ball in ellipse*/
         for (i = 180; i > 0; i = i - 6) {
-                x[j] = midx - (xrad * cos((i * 3.14) / 180));
-                y[j++] = midy - (yrad * sin((i * 3.14) / 180));
+                a[j] = midx - (xrad * cos((i * 3.14) / 180));
+                b[j++] = midy - (yrad * sin((i * 3.14) / 180));
 
         }
         return;
 }
 
-void AntiMotion(int xrad, int yrad, int midx, int midy, int x[1], int y[1]) {
+void AntiMotion(int xrad, int yrad, int midx, int midy, int a[1], int b[1]) {
         int i, j = 0;
 
         /* positions of ball in ellipse*/
         for (i = 290; i > 0; i = i - 6) {
-                x[j] = midx + (xrad * sin((i * 3.14) / 180));
-                y[j++] = midy + (yrad * cos((i * 3.14) / 180));
+                a[j] = midx + (xrad * sin((i * 3.14) / 180));
+                b[j++] = midy + (yrad * cos((i * 3.14) / 180));
 
         }
         return;
@@ -105,6 +105,9 @@ int main()
     int posn=20;
 
     int xa,ya,xb,yb;
+
+    int s_xa,s_ya,s_xb,s_yb;
+    int mmx,mmy;
 
     /* initialize graphic mode */
     initgraph (&gd, &gm,NULL);
@@ -125,7 +128,7 @@ int main()
 
     /* positions of ball on corresponding ellipse */
 
-        Motion(xrad-10, yrad, midx, midy+40, a[8], b[8]);
+    Motion(xrad-10, yrad, midx, midy+40, a[8], b[8]);
 
     init_keyboard();
 
@@ -137,9 +140,16 @@ int main()
         ya=getmaxy()-100;
         xb=getmaxx()-50;
         yb=getmaxy()-50;
-         
+        
+        mmx = midx;
+        mmy = midy + 40;
 
        	while(1){
+            s_xa = xa -30;
+            s_ya = ya -100 - radius;
+            s_xb = xb;
+            s_yb = yb -150 - radius;
+            
             setlinestyle(SOLID_LINE, 1, 3);
             /* road for stick man */
             line(0, getmaxy() - 50, getmaxx(),getmaxy() -50);
@@ -178,34 +188,37 @@ int main()
             /*ball design*/
            
                 /* drawing orbits */
-                setcolor(WHITE);
-                
-                ellipse(midx, midy+40, 0, 360, xrad, yrad);
+            setcolor(WHITE);
+            
+            ellipse(mmx, mmy, 0, 360, xrad, yrad);
 
-                /* ball */
-               setcolor(WHITE);
-                //setfillstyle(SOLID_FILL, LIGHTRED);
-                pieslice(a[8][posn], b[8][posn], 0, 360, radius);
+            /* ball */
+            setcolor(WHITE);
+            //setfillstyle(SOLID_FILL, LIGHTRED);
+            pieslice(a[8][posn], b[8][posn], 0, 360, radius);
 
-                /* Motion(xrad, yrad, midx, midy, a[8], b[8]);
-                if (((a[8][posn]+radius)==(xa-30+radius))&&((b[8][posn]+radius)==(ya-50+radius))){
-                /* checking for one complete rotation */
-                
+            /* Motion(xrad, yrad, midx, midy, a[8], b[8]);
+            if (((a[8][posn]+radius)==(xa-30+radius))&&((b[8][posn]+radius)==(ya-50+radius))){
+            /* checking for one complete rotation */
+            
+            if (mmx = s_xa){
                 if (posn>0){
                     posn = posn - 1;
-                    Motion(xrad, yrad, midx, midy+40, a[8], b[8]);
+                    Motion(xrad, yrad, mmx, mmy, a[8], b[8]);
                 }
-            
-               if (posn <= 0) {
-                        while(posn!=30){
-                            AntiMotion(xrad, yrad, midx, midy+40, a[8], b[8]);
-                            posn = posn + 1;
-                        }
-                }
-            
+            }
 
-                /* sleep for 100 milliseconds */
-                delay(100);
+            if (mmx = s_xb){
+                if (posn <= 0) {
+                    while(posn!=30){
+                        AntiMotion(xrad, yrad, mmx, mmy, a[8], b[8]);
+                        posn = posn + 1;
+                    }
+                }
+            }        
+
+            /* sleep for 100 milliseconds */
+            delay(100);
 
             
             /* sleeps for 50 milliseconds */
@@ -217,16 +230,16 @@ int main()
                 _putch(ch);
                // printf("%c",ch);
                 //for player1
-                if (ch=='w') ya--;
-                if (ch=='s') ya++;
-                if (ch=='a') xa--;
-                if (ch=='d') xa++;
+                if (ch=='w') ya--; mmy--;
+                if (ch=='s') ya++; mmy++;
+                if (ch=='a') xa--; mmx--;
+                if (ch=='d') xa++; mmy++;
 
                 //for player2
-                if (ch=='i') yb--;
-                if (ch=='k') yb++;
-                if (ch=='j') xb--;
-                if (ch=='l') xb++;
+                if (ch=='i') yb--; mmy--;
+                if (ch=='k') yb++; mmy++;
+                if (ch=='j') xb--; mmx--;
+                if (ch=='l') xb++; mmx++;
             }
             cleardevice();
         }
