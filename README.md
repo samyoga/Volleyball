@@ -1,7 +1,7 @@
 # Volleyball - Graphics game in Linux
 A C++ and OpenGL based game made in BGI graphics in c programming making 2 player and ball with display score in Linux
 
-[![Volleyball features](https://i.imgur.com/FDGpiwp.gif)](https://youtu.be/Cpj3XVdsK_g)
+[![Volleyball features](https://i.imgur.com/MRRVvWf.png)](https://i.imgur.com/MRRVvWf.png)
 
 **Note:**
 Make sure you have graphics library setup for linux
