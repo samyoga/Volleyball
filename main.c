@@ -112,6 +112,8 @@ int main()
     int mmx,mmy;
 
     int count;
+    char text[] = "Score:";
+    int sc =0;
 
     /* initialize graphic mode */
     initgraph (&gd, &gm,NULL);
@@ -196,7 +198,20 @@ int main()
                 /* drawing orbits */
             setcolor(WHITE);
             
-            //ellipse(mmx -260, mmy + 50, 0, 360, xrad, yrad);
+            //ellipse(mmx , mmy + 50, 0, 360, xrad, yrad);
+
+            //settextstyle(10, HORIZ_DIR, 1);
+            //outtextxy(170, maxy/2-50, title);
+            
+            outtextxy(250, 40, text);
+            //outtextxy(245,40,itoa(sc,10));
+            printf("%d",sc);
+            
+            //stringstream ss1;
+            //ss1 << score;
+            //string s1 = ss1.str();
+            //char* score_s1 = (char*) s1.c_str();
+            //outtextxy(570, 10, score_s1);
 
             /* ball */
             setcolor(WHITE);
@@ -216,6 +231,12 @@ int main()
                     count++;
                 }
             }
+
+            if (count==30){
+                sc++;
+        
+            }  
+            
             if (posn <= 0) {
                 while(posn!=30){
                     for (i=0;i<30;i++){
@@ -230,9 +251,21 @@ int main()
                 Motion(xrad, yrad, mmx, mmy, a[8], b[8]);
                 posn = 30;
                 count =0;
-            }     
+                //sc++;
+        
+            }   
 
-            //AntiMotion(xrad, yrad, mmx, mmy, a[8], b[8]);
+
+            if (count==56){
+                sc++;
+        
+            }   
+
+            if (mmx != s_xa){
+                sc = 0;
+            }
+
+            
             /* sleep for 100 milliseconds */
             delay(100);
 
