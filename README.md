@@ -1,5 +1,5 @@
 # Volleyball - Graphics game in Linux
-A C++ and OpenGL based game made in BGI graphics in c programming making 2 player and ball with display score in Linux
+A C based game made in BGI graphics in c programming making 2 player and ball with display score in Linux
 
 [![Volleyball features](https://i.imgur.com/MRRVvWf.png)](https://i.imgur.com/MRRVvWf.png)
 
@@ -16,8 +16,8 @@ Then,
 
 Clone the source locally:
 ```
-$ git clone https://github.com/aryaminus/srijana
-$ cd srijana
+$ git clone https://github.com/samyoga/volleyball
+$ cd volleyball
 $ make run
 ```
 

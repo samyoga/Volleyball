@@ -132,10 +132,6 @@ int main()
     xb=x;
     yb=y;
 
-    /* positions of ball on corresponding ellipse */
-
-    //Motion(xrad-10, yrad, midx, midy+40, a[8], b[8]);
-
     init_keyboard();
 
     while (1) {
@@ -197,29 +193,15 @@ int main()
            
                 /* drawing orbits */
             setcolor(WHITE);
-            
-            //ellipse(mmx , mmy + 50, 0, 360, xrad, yrad);
 
-            //settextstyle(10, HORIZ_DIR, 1);
-            //outtextxy(170, maxy/2-50, title);
-            
             outtextxy(250, 40, text);
-            //outtextxy(245,40,itoa(sc,10));
             printf("%d",sc);
-            
-            //stringstream ss1;
-            //ss1 << score;
-            //string s1 = ss1.str();
-            //char* score_s1 = (char*) s1.c_str();
-            //outtextxy(570, 10, score_s1);
 
             /* ball */
             setcolor(WHITE);
             //setfillstyle(SOLID_FILL, LIGHTRED);
             pieslice(a[8][posn], b[8][posn], 0, 360, radius);
 
-            /* Motion(xrad, yrad, midx, midy, a[8], b[8]);
-            if (((a[8][posn]+radius)==(xa-30+radius))&&((b[8][posn]+radius)==(ya-50+radius))){
             /* checking for one complete rotation */
             
             mmx = mmx -260 - xrad;
@@ -227,7 +209,6 @@ int main()
             if (mmx = s_xa){
                 if (posn>0){
                     posn = posn - 1;
-                    //Motion(xrad, yrad, mmx, mmy, a[8], b[8]);
                     count++;
                 }
             }
@@ -251,7 +232,6 @@ int main()
                 Motion(xrad, yrad, mmx, mmy, a[8], b[8]);
                 posn = 30;
                 count =0;
-                //sc++;
         
             }   
 
@@ -277,7 +257,7 @@ int main()
 
                 int ch = _getch();
                 _putch(ch);
-               // printf("%c",ch);
+
                 //for player1
                 if (ch=='w') ya--; mmy--;
                 if (ch=='s') ya++; mmy++;
